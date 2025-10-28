@@ -531,10 +531,21 @@ input:focus-visible {
     animation: none;
     visibility: visible;
     pointer-events: auto;
+    align-items: center;
   }
 
   .site-nav a {
     color: var(--ink);
+  }
+
+  .site-nav .nav-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .site-nav .nav-link:not(.nav-cta) {
+    padding: 0.4rem 0;
+    line-height: 1.2;
   }
 
   .nav-cta {
