@@ -213,7 +213,7 @@
             <div class="shell feature-grid">
                 <article class="feature-card">
                     <div class="icon" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" role="img" aria-hidden="true"><path fill="currentColor" d="M8 12a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v10.5a4 4 0 0 1-2 3.46l-14 8.17a4 4 0 0 1-4 0l-14-8.17A4 4 0 0 1 8 22.5V12Z" opacity=".2"/><path fill="currentColor" d="M12 10a2 2 0 0 0-2 2v10.5a2 2 0 0 0 1 1.73l14 8.17 14-8.17a2 2 0 0 0 1-1.73V12a2 2 0 0 0-2-2H12Zm12 26.77-14-8.16A4 4 0 0 1 8 22.5V12a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v10.5a4 4 0 0 1-2 3.46l-14 8.16a4 4 0 0 1-4 0Z"/></svg>
+                        <span data-feather="share-2"></span>
                     </div>
                     <h3>Multi-agentowy pipeline</h3>
                     <p>Automatyczna sekwencja od briefu po publikację z kontrolą jakości na każdym etapie.</p>
@@ -225,7 +225,7 @@
                 </article>
                 <article class="feature-card">
                     <div class="icon" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" role="img" aria-hidden="true"><path fill="currentColor" d="M14 8a6 6 0 0 0-6 6v20a6 6 0 0 0 6 6h20a6 6 0 0 0 6-6V14a6 6 0 0 0-6-6H14Zm0 4h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V14a2 2 0 0 1 2-2Z"/><path fill="currentColor" d="M32.95 18.05a1.5 1.5 0 0 0-2.12 0L24 24.88l-2.83-2.83a1.5 1.5 0 0 0-2.12 2.12l3.89 3.89a1.5 1.5 0 0 0 2.12 0l7.89-7.89a1.5 1.5 0 0 0 0-2.12Z" opacity=".6"/></svg>
+                        <span data-feather="check-circle"></span>
                     </div>
                     <h3>Jakość i kontrola</h3>
                     <p>Kontrolowany, „human + AI” ton treści dzięki podglądom i sugestiom dla redaktorów.</p>
@@ -237,7 +237,7 @@
                 </article>
                 <article class="feature-card">
                     <div class="icon" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" role="img" aria-hidden="true"><path fill="currentColor" d="M24 6a18 18 0 1 0 18 18A18 18 0 0 0 24 6Zm0 4a14 14 0 1 1-14 14A14 14 0 0 1 24 10Z"/><path fill="currentColor" d="M16 24a8 8 0 0 1 14.64-4.64l1.91-1.91A10.5 10.5 0 0 0 13.5 24h2.5Zm0 0a8 8 0 0 0 14.64 4.64l1.91 1.91A10.5 10.5 0 0 1 13.5 24H16Z" opacity=".6"/></svg>
+                        <span data-feather="trending-up"></span>
                     </div>
                     <h3>SEO enrichment</h3>
                     <p>Automatycznie generowane nagłówki, meta tagi oraz rekomendowane linki wewnętrzne.</p>
@@ -249,7 +249,7 @@
                 </article>
                 <article class="feature-card">
                     <div class="icon" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" role="img" aria-hidden="true"><path fill="currentColor" d="M12 10a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v4h-6v-2H18v24h12v-6h6v8a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V10Z"/><path fill="currentColor" d="M36 20a2 2 0 0 0-2 2v4h-4a2 2 0 1 0 0 4h4v4a2 2 0 1 0 4 0v-4h4a2 2 0 1 0 0-4h-4v-4a2 2 0 0 0-2-2Z" opacity=".6"/></svg>
+                        <span data-feather="link"></span>
                     </div>
                     <h3>Integracje (wkrótce)</h3>
                     <p>Planowane połączenia z najważniejszymi platformami e-commerce.</p>
@@ -398,8 +398,12 @@
             </div>
         </div>
     </footer>
+    <script src="https://unpkg.com/feather-icons@4.29.0/dist/feather.min.js" integrity="sha384-kWAXZvsKKbVUmyH8Qt9cwepp4tXaAXYXLfPHB7+lawHcEFe9DbVkzfIwjYGrbB9T" crossorigin="anonymous"></script>
     <script>
     (function () {
+        if (window.feather) {
+            window.feather.replace();
+        }
         const nav = document.getElementById('primary-navigation');
         const toggle = document.querySelector('.menu-toggle');
         const message = document.querySelector('.form-message');
