@@ -287,9 +287,24 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(108, 92, 231, 0.12);
   border-radius: 0.9rem;
+  background: linear-gradient(140deg, rgba(108, 92, 231, 0.22), rgba(108, 92, 231, 0.08));
+  border: 1px solid rgba(108, 92, 231, 0.28);
   color: var(--purple);
+  box-shadow: 0 10px 20px rgba(10, 37, 64, 0.08);
+}
+
+.feature-card .icon [data-feather] {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.feature-card .icon svg {
+  width: 1.85rem;
+  height: 1.85rem;
+  stroke-width: 2.1;
+  stroke: currentColor;
 }
 
 .feature-card ul {
