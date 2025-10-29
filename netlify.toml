@@ -12,6 +12,21 @@
   to = "/en/"
   status = 301
 
+[[redirects]]
+  from = "/es/index.html"
+  to = "/es/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/index.html"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/de/index.html"
+  to = "/de/"
+  status = 301
+
 [dev]
   command = ""
   port = 8888

@@ -126,8 +126,10 @@ body {
 .language-switch {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.65rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.45rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 999px;
   border: 1px solid rgba(26, 42, 58, 0.16);
   background: rgba(255, 255, 255, 0.8);
@@ -155,13 +157,6 @@ body {
   color: #fff;
 }
 
-.language-divider {
-  width: 1px;
-  height: 1.25rem;
-  background: currentColor;
-  opacity: 0.35;
-}
-
 .language-code {
   font-variant-numeric: tabular-nums;
 }
@@ -169,6 +164,16 @@ body {
 .flag {
   font-size: 1.1rem;
   line-height: 1;
+}
+
+.language-option:not(:first-child)::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.1rem;
+  background: currentColor;
+  opacity: 0.35;
+  margin-right: 0.4rem;
 }
 
 .site-nav .language-switch {
@@ -186,7 +191,7 @@ body {
   color: inherit;
 }
 
-.site-nav .language-divider {
+.site-nav .language-option:not(:first-child)::before {
   opacity: 0.55;
 }
 
