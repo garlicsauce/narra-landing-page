@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Narra — automatización de contenidos con IA para e-commerce | getnarra.app</title>
+    <meta name="description" content="Narra automatiza la creación de contenido con un pipeline multiagente: del esquema al pulido SEO. Mantén la voz de tu marca. Prueba gratuita de 7 días." />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Narra — automatización de contenidos con IA para e-commerce" />
+    <meta property="og:description" content="Narra automatiza la creación de contenido con un pipeline multiagente: del esquema al pulido SEO. Mantén la voz de tu marca." />
+    <meta property="og:image" content="https://getnarra.app/assets/og-image.svg" />
+    <meta property="og:url" content="https://getnarra.app/es/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Narra — automatización de contenidos con IA para e-commerce" />
+    <meta name="twitter:description" content="Narra automatiza la creación de contenido con un pipeline multiagente: del esquema al pulido SEO. Mantén la voz de tu marca." />
+    <meta name="twitter:image" content="https://getnarra.app/assets/og-image.svg" />
+    <link rel="alternate" hreflang="pl" href="/" />
+    <link rel="alternate" hreflang="en" href="/en/" />
+    <link rel="alternate" hreflang="es" href="/es/" />
+    <link rel="alternate" hreflang="fr" href="/fr/" />
+    <link rel="alternate" hreflang="de" href="/de/" />
+    <link rel="alternate" hreflang="x-default" href="/en/" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+        :root {
+            color-scheme: light;
+            --navy: #0a2540;
+            --purple: #6c5ce7;
+            --offwhite: #f7f7fb;
+            --ink: #1a2a3a;
+            --muted: #6b7280;
+            --radius-lg: 1rem;
+            --shadow-md: 0 20px 45px rgba(10, 37, 64, 0.12);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--offwhite);
+            color: var(--ink);
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .shell {
+            max-width: min(1120px, 92vw);
+            margin: 0 auto;
+        }
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(247, 247, 251, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(26, 42, 58, 0.08);
+        }
+        .hero {
+            position: relative;
+            padding: clamp(4rem, 10vw, 6.5rem) 0 clamp(3rem, 8vw, 5rem);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(108, 92, 231, 0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(10, 37, 64, 0.12), transparent 60%);
+            z-index: -2;
+        }
+        .hero::after {
+            content: "\201C Donde las ideas se convierten en historias. \201D";
+            position: absolute;
+            font-size: clamp(2.75rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: rgba(108, 92, 231, 0.08);
+            right: clamp(-6rem, -10vw, -2rem);
+            bottom: clamp(-2rem, -6vw, 0rem);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: clamp(2.75rem, 4vw, 4rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--navy);
+        }
+        .hero p.hero-tagline {
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+        }
+        .hero p.hero-description {
+            max-width: 52ch;
+            line-height: 1.6;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+        .primary-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.65rem;
+            border-radius: 999px;
+            background: var(--purple);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+        }
+        .primary-cta:hover {
+            background: #5844d6;
+        }
+        .primary-cta:focus-visible,
+        .secondary-cta:focus-visible,
+        .ghost-link:focus-visible,
+        .menu-toggle:focus-visible,
+        .nav-link:focus-visible {
+            outline: 3px solid rgba(108, 92, 231, 0.45);
+            outline-offset: 3px;
+            border-radius: 999px;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Narra",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://getnarra.app/es/",
+      "description": "Narra automatiza la creación de contenido con un pipeline multiagente: del esquema al pulido SEO.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Starter",
+          "price": "59",
+          "priceCurrency": "PLN",
+          "availability": "https://schema.org/PreOrder"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "price": "149",
+          "priceCurrency": "PLN",
+          "availability": "https://schema.org/PreOrder"
+        },
+        {
+          "@type": "Offer",
+          "name": "Agency",
+          "price": "299",
+          "priceCurrency": "PLN",
+          "availability": "https://schema.org/PreOrder"
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Saltar a contenido principal</a>
+    <header class="site-header" aria-label="Navegación principal">
+        <div class="shell nav-shell">
+            <a class="brand" href="#hero" aria-label="Narra – inicio">
+                <img src="../assets/logo.svg" alt="Narra" width="120" height="32" decoding="async" />
+            </a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="menu-label">Menú</span>
+                <span class="menu-icon" aria-hidden="true"></span>
+            </button>
+            <nav id="primary-navigation" class="site-nav" aria-label="Secciones de la página">
+                <a class="nav-link" href="#features">Funciones</a>
+                <a class="nav-link" href="#workflow">Cómo funciona</a>
+                <a class="nav-link" href="#pricing">Precios</a>
+                <a class="nav-link" href="#faq">FAQ</a>
+                <a class="nav-link nav-cta" href="#beta">Únete a la beta</a>
+                <div class="language-switch" role="group" aria-label="Selector de idioma">
+                    <a class="language-option" href="/" lang="pl">
+                        <span aria-hidden="true" class="flag">🇵🇱</span>
+                        <span class="language-code">PL</span>
+                    </a>
+                    <a class="language-option" href="/en/" lang="en">
+                        <span aria-hidden="true" class="flag">🇬🇧</span>
+                        <span class="language-code">EN</span>
+                    </a>
+                    <a class="language-option is-active" href="/es/" lang="es" aria-current="page">
+                        <span aria-hidden="true" class="flag">🇪🇸</span>
+                        <span class="language-code">ES</span>
+                    </a>
+                    <a class="language-option" href="/fr/" lang="fr">
+                        <span aria-hidden="true" class="flag">🇫🇷</span>
+                        <span class="language-code">FR</span>
+                    </a>
+                    <a class="language-option" href="/de/" lang="de">
+                        <span aria-hidden="true" class="flag">🇩🇪</span>
+                        <span class="language-code">DE</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main id="main">
+        <section id="hero" class="hero">
+            <div class="shell hero-grid">
+                <div class="hero-copy">
+                    <h1>Automatiza la producción de contenidos. Conserva la voz de tu marca.</h1>
+                    <p class="hero-tagline">Donde las ideas se convierten en historias.</p>
+                    <p class="hero-description">Narra es una plataforma de IA que transforma ideas en textos SEO listos para publicar. Pipeline multiagente: esquema → verificación → reescritura → SEO → publicación.</p>
+                    <div class="hero-actions">
+                        <a class="primary-cta" href="#beta">Únete a la beta</a>
+                        <a class="ghost-link" href="#workflow">Ver cómo funciona</a>
+                    </div>
+                </div>
+                <div class="hero-panel" aria-hidden="true">
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <span class="chip">Humano + IA</span>
+                            <span class="chip chip-outline">QA en tiempo real</span>
+                        </div>
+                        <div class="hero-card-body">
+                            <p>“Narra mantiene el tono de la marca incluso al publicar automáticamente. Cada artículo pasa por verificación de hechos y revisión SEO antes de salir en vivo.”</p>
+                            <ul>
+                                <li>Del brief al esquema en 2 minutos</li>
+                                <li>Correcciones automáticas con fuentes citadas</li>
+                                <li>Metadatos y enlaces internos sin trabajo manual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="section features">
+            <div class="shell section-header">
+                <h2>Lo que Narra puede hacer</h2>
+                <p>Un equipo de IA multiagente colabora con tu equipo de contenidos para reducir el tiempo de la idea a la publicación.</p>
+            </div>
+            <div class="shell feature-grid">
+                <article class="feature-card">
+                    <div class="icon" aria-hidden="true">
+                        <span data-feather="share-2"></span>
+                    </div>
+                    <h3>Pipeline multiagente</h3>
+                    <p>Secuencia automatizada del brief a la publicación con controles de calidad en cada paso.</p>
+                    <ul>
+                        <li>Esquema → verificación → reescritura</li>
+                        <li>Puntuación SEO en tiempo real</li>
+                        <li>Exportación con un clic a tu CMS</li>
+                    </ul>
+                </article>
+                <article class="feature-card">
+                    <div class="icon" aria-hidden="true">
+                        <span data-feather="check-circle"></span>
+                    </div>
+                    <h3>Calidad y control</h3>
+                    <p>Gestión de tono “Humano + IA” con vistas previas y sugerencias para editores.</p>
+                    <ul>
+                        <li>Modo de cocreación con comentarios</li>
+                        <li>Seguimiento de revisiones y fuentes</li>
+                        <li>Consistencia del tono de marca en cada párrafo</li>
+                    </ul>
+                </article>
+                <article class="feature-card">
+                    <div class="icon" aria-hidden="true">
+                        <span data-feather="trending-up"></span>
+                    </div>
+                    <h3>Enriquecimiento SEO</h3>
+                    <p>Generación automática de encabezados, metadatos y enlaces internos recomendados.</p>
+                    <ul>
+                        <li>Brief SEO → estructura H1–H3</li>
+                        <li>Título y descripción meta en tu tono de marca</li>
+                        <li>Mapa de enlaces internos</li>
+                    </ul>
+                </article>
+                <article class="feature-card">
+                    <div class="icon" aria-hidden="true">
+                        <span data-feather="link"></span>
+                    </div>
+                    <h3>Integraciones (próximamente)</h3>
+                    <p>Conexiones planificadas con las principales plataformas de e-commerce.</p>
+                    <ul>
+                        <li>Shoper, WooCommerce, Shopify</li>
+                        <li>WordPress y API personalizada</li>
+                        <li>Publicación automatizada y webhooks</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <section id="workflow" class="section workflow">
+            <div class="shell section-header">
+                <h2>Cómo funciona Narra</h2>
+                <p>Un pipeline transparente te permite seguir cada etapa desde el brief hasta el artículo listo para publicar.</p>
+            </div>
+            <div class="shell workflow-grid" role="list">
+                <article class="workflow-step" role="listitem">
+                    <div class="step-number">1</div>
+                    <h3>Brief → esquema</h3>
+                    <p>Indica tema, palabras clave y tono. El agente “Compositor” crea un esquema en minutos.</p>
+                </article>
+                <article class="workflow-step" role="listitem">
+                    <div class="step-number">2</div>
+                    <h3>Verificación → edición</h3>
+                    <p>El agente “Investigador” verifica hechos, adjunta fuentes y marca los elementos que requieren aprobación.</p>
+                </article>
+                <article class="workflow-step" role="listitem">
+                    <div class="step-number">3</div>
+                    <h3>SEO → estructura</h3>
+                    <p>“Optimizador” genera encabezados H1–H3, metadatos y sugerencias de enlaces internos.</p>
+                </article>
+                <article class="workflow-step" role="listitem">
+                    <div class="step-number">4</div>
+                    <h3>Publicar / exportar</h3>
+                    <p>“Editor” envía el contenido a tu CMS o exporta Markdown/HTML con metadatos.</p>
+                </article>
+            </div>
+        </section>
+        <section id="pricing" class="section pricing">
+            <div class="shell section-header">
+                <h2>Planes flexibles para equipos de contenido</h2>
+                <p>Comienza con una prueba y amplía la colaboración a medida que tu contenido genera ingresos.</p>
+            </div>
+            <div class="shell pricing-grid">
+                <article class="pricing-card" aria-labelledby="plan-starter">
+                    <h3 id="plan-starter">Starter</h3>
+                    <p class="price"><span>59</span> PLN / mes</p>
+                    <p>5 proyectos al mes, ideal para marcas boutique.</p>
+                    <ul>
+                        <li>Pipeline del esquema al SEO</li>
+                        <li>1 usuario + puesto de revisor</li>
+                        <li>Exportación a WordPress</li>
+                    </ul>
+                    <a class="secondary-cta" href="#beta">Solicita acceso</a>
+                </article>
+                <article class="pricing-card" aria-labelledby="plan-pro">
+                    <h3 id="plan-pro">Pro</h3>
+                    <p class="price"><span>149</span> PLN / mes</p>
+                    <p>Plan más popular para tiendas e-commerce con publicaciones regulares.</p>
+                    <ul>
+                        <li>Proyectos ilimitados</li>
+                        <li>3 puestos para el equipo</li>
+                        <li>Integraciones con Shopify y Shoper</li>
+                    </ul>
+                    <a class="secondary-cta" href="#beta">Únete a la beta</a>
+                </article>
+                <article class="pricing-card" aria-labelledby="plan-agency">
+                    <h3 id="plan-agency">Agency</h3>
+                    <p class="price"><span>299</span> PLN / mes</p>
+                    <p>Para agencias que gestionan varias marcas y necesitan informes personalizados.</p>
+                    <ul>
+                        <li>10 puestos + permisos para clientes</li>
+                        <li>API de publicación y webhooks</li>
+                        <li>SLA del 99,9 % y customer success dedicado</li>
+                    </ul>
+                    <a class="secondary-cta" href="#beta">Hablemos</a>
+                </article>
+            </div>
+        </section>
+        <section id="faq" class="section faq">
+            <div class="shell section-header">
+                <h2>Preguntas frecuentes</h2>
+                <p>¿Tienes más preguntas? Escribe a <a href="mailto:hello@getnarra.app">hello@getnarra.app</a>.</p>
+            </div>
+            <div class="shell faq-grid">
+                <details>
+                    <summary>¿Cuánto tarda en implementarse Narra?</summary>
+                    <p>Puedes generar tu primer esquema el mismo día. El onboarding incluye un taller de tono de marca y la configuración del glosario.</p>
+                </details>
+                <details>
+                    <summary>¿Puedo editar el contenido antes de publicarlo?</summary>
+                    <p>Sí, cada etapa admite edición colaborativa con comentarios. Siempre tienes la aprobación final.</p>
+                </details>
+                <details>
+                    <summary>¿Cómo funciona la verificación de hechos?</summary>
+                    <p>El agente Investigador marca los párrafos que necesitan confirmación y enlaza las fuentes para una revisión rápida.</p>
+                </details>
+                <details>
+                    <summary>¿Narra admite varios idiomas?</summary>
+                    <p>Sí, la plataforma admite polaco, inglés, español, francés y alemán manteniendo la coherencia del tono de marca.</p>
+                </details>
+            </div>
+        </section>
+        <section id="beta" class="section beta-form">
+            <div class="shell form-wrapper">
+                <div class="form-copy">
+                    <h2>Únete a la beta privada</h2>
+                    <p>Déjanos tu correo y te contactaremos con una invitación y una prueba de 7 días tras verificar el perfil de tu marca.</p>
+                </div>
+                <form class="beta" name="beta-es" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="beta-es" />
+                    <p class="hidden">
+                        <label>No rellenes esto: <input name="bot-field" /></label>
+                    </p>
+                    <div class="form-row">
+                        <label for="email">Correo de trabajo</label>
+                        <input id="email" name="email" type="email" placeholder="ana@tutienda.com" required autocomplete="email" />
+                    </div>
+                    <div class="form-row form-row-inline">
+                        <div>
+                            <label for="company">Marca o empresa</label>
+                            <input id="company" name="company" type="text" placeholder="Tu marca" required autocomplete="organization" />
+                        </div>
+                        <div>
+                            <label for="role">Rol</label>
+                            <input id="role" name="role" type="text" placeholder="Head of Content" autocomplete="organization-title" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="website">Sitio web</label>
+                        <input id="website" name="website" type="url" placeholder="https://" autocomplete="url" />
+                    </div>
+                    <div class="form-row">
+                        <label for="notes">Notas adicionales</label>
+                        <textarea id="notes" name="notes" placeholder="Comparte tus objetivos de contenido"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="primary-cta" type="submit">Solicitar invitación</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer" aria-label="Pie de página">
+        <div class="shell footer-grid">
+            <div>
+                <a class="brand" href="#hero" aria-label="Narra – inicio">
+                    <img src="../assets/logo.svg" alt="Narra" width="120" height="32" decoding="async" />
+                </a>
+                <p class="footer-tagline">AI multiagente para crear contenidos listos para publicar.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Navegación secundaria">
+                <h3>Mapa del sitio</h3>
+                <a class="footer-link" href="#features">Funciones</a>
+                <a class="footer-link" href="#workflow">Cómo funciona</a>
+                <a class="footer-link" href="#pricing">Precios</a>
+                <a class="footer-link" href="#faq">FAQ</a>
+                <a class="footer-link" href="#beta">Únete a la beta</a>
+            </nav>
+            <div class="footer-languages" role="group" aria-label="Selector de idioma">
+                <a class="language-option" href="/" lang="pl">
+                    <span aria-hidden="true" class="flag">🇵🇱</span>
+                    <span class="language-code">PL</span>
+                </a>
+                <a class="language-option" href="/en/" lang="en">
+                    <span aria-hidden="true" class="flag">🇬🇧</span>
+                    <span class="language-code">EN</span>
+                </a>
+                <a class="language-option is-active" href="/es/" lang="es" aria-current="page">
+                    <span aria-hidden="true" class="flag">🇪🇸</span>
+                    <span class="language-code">ES</span>
+                </a>
+                <a class="language-option" href="/fr/" lang="fr">
+                    <span aria-hidden="true" class="flag">🇫🇷</span>
+                    <span class="language-code">FR</span>
+                </a>
+                <a class="language-option" href="/de/" lang="de">
+                    <span aria-hidden="true" class="flag">🇩🇪</span>
+                    <span class="language-code">DE</span>
+                </a>
+            </div>
+        </div>
+        <p class="footer-note">© <span data-year></span> Narra. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        menuToggle?.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            siteNav?.classList.toggle('is-open');
+        });
+        feather.replace();
+        const yearEl = document.querySelector('[data-year]');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
+        }
+    </script>
+</body>
+</html>

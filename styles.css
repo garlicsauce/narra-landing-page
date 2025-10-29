@@ -123,6 +123,78 @@ body {
   letter-spacing: 0.01em;
 }
 
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.45rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 42, 58, 0.16);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+.language-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: inherit;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: background var(--transition), color var(--transition);
+}
+
+.language-option:is(:hover, :focus-visible) {
+  background: rgba(108, 92, 231, 0.12);
+}
+
+.language-option.is-active {
+  background: var(--purple);
+  color: #fff;
+}
+
+.language-code {
+  font-variant-numeric: tabular-nums;
+}
+
+.flag {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.language-option:not(:first-child)::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.1rem;
+  background: currentColor;
+  opacity: 0.35;
+  margin-right: 0.4rem;
+}
+
+.site-nav .language-switch {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.site-nav .language-option:is(:hover, :focus-visible) {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.site-nav .language-option.is-active {
+  background: rgba(255, 255, 255, 0.28);
+  color: inherit;
+}
+
+.site-nav .language-option:not(:first-child)::before {
+  opacity: 0.55;
+}
+
 .site-nav.is-open {
   transform: translateY(0);
   visibility: visible;
@@ -551,6 +623,21 @@ input:focus-visible {
 
   .site-nav a {
     color: var(--ink);
+  }
+
+  .site-nav .language-switch {
+    background: rgba(108, 92, 231, 0.12);
+    border-color: rgba(108, 92, 231, 0.35);
+    color: var(--ink);
+  }
+
+  .site-nav .language-option.is-active {
+    background: var(--purple);
+    color: #fff;
+  }
+
+  .site-nav .language-option:not(.is-active):is(:hover, :focus-visible) {
+    background: rgba(108, 92, 231, 0.2);
   }
 
   .site-nav .nav-link {
