@@ -178,27 +178,19 @@
                 <a class="nav-link" href="#pricing">Cennik</a>
                 <a class="nav-link" href="#faq">FAQ</a>
                 <a class="nav-link nav-cta" href="#beta">Dołącz do bety</a>
-                <div class="language-switch" role="group" aria-label="Wybór języka">
-                    <a class="language-option is-active" href="/" lang="pl" aria-current="page">
-                        <span aria-hidden="true" class="flag">🇵🇱</span>
-                        <span class="language-code">PL</span>
-                    </a>
-                    <a class="language-option" href="/en/" lang="en">
-                        <span aria-hidden="true" class="flag">🇬🇧</span>
-                        <span class="language-code">EN</span>
-                    </a>
-                    <a class="language-option" href="/es/" lang="es">
-                        <span aria-hidden="true" class="flag">🇪🇸</span>
-                        <span class="language-code">ES</span>
-                    </a>
-                    <a class="language-option" href="/fr/" lang="fr">
-                        <span aria-hidden="true" class="flag">🇫🇷</span>
-                        <span class="language-code">FR</span>
-                    </a>
-                    <a class="language-option" href="/de/" lang="de">
-                        <span aria-hidden="true" class="flag">🇩🇪</span>
-                        <span class="language-code">DE</span>
-                    </a>
+                <div class="language-switch">
+                    <div class="language-select" data-language-switch>
+                        <button class="language-trigger" type="button" data-language-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Wybierz język">
+                            <span class="language-trigger-text" data-language-label>English (EN)</span>
+                        </button>
+                        <ul class="language-options" data-language-menu role="listbox" hidden>
+                            <li><button type="button" role="option" data-language-option data-lang="en" data-href="/en/">English (EN)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="pl" data-href="/">Polski (PL)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="es" data-href="/es/">Español (ES)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="fr" data-href="/fr/">Français (FR)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="de" data-href="/de/">Deutsch (DE)</button></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -419,27 +411,19 @@
                 <a href="#pricing">Cennik</a>
                 <a href="#faq">FAQ</a>
                 <a href="#beta">Dołącz do bety</a>
-                <div class="language-switch" role="group" aria-label="Wybór języka">
-                    <a class="language-option is-active" href="/" lang="pl" aria-current="page">
-                        <span aria-hidden="true" class="flag">🇵🇱</span>
-                        <span class="language-code">PL</span>
-                    </a>
-                    <a class="language-option" href="/en/" lang="en">
-                        <span aria-hidden="true" class="flag">🇬🇧</span>
-                        <span class="language-code">EN</span>
-                    </a>
-                    <a class="language-option" href="/es/" lang="es">
-                        <span aria-hidden="true" class="flag">🇪🇸</span>
-                        <span class="language-code">ES</span>
-                    </a>
-                    <a class="language-option" href="/fr/" lang="fr">
-                        <span aria-hidden="true" class="flag">🇫🇷</span>
-                        <span class="language-code">FR</span>
-                    </a>
-                    <a class="language-option" href="/de/" lang="de">
-                        <span aria-hidden="true" class="flag">🇩🇪</span>
-                        <span class="language-code">DE</span>
-                    </a>
+                <div class="language-switch">
+                    <div class="language-select" data-language-switch>
+                        <button class="language-trigger" type="button" data-language-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Wybierz język">
+                            <span class="language-trigger-text" data-language-label>English (EN)</span>
+                        </button>
+                        <ul class="language-options" data-language-menu role="listbox" hidden>
+                            <li><button type="button" role="option" data-language-option data-lang="en" data-href="/en/">English (EN)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="pl" data-href="/">Polski (PL)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="es" data-href="/es/">Español (ES)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="fr" data-href="/fr/">Français (FR)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="de" data-href="/de/">Deutsch (DE)</button></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
             <div class="footer-meta">
@@ -498,6 +482,159 @@
                 });
             });
         }
+        const normalizeLang = (lang) => (lang || '').toLowerCase().split('-')[0];
+        const preferredLang = normalizeLang(document.documentElement.lang) || 'en';
+        const languageSwitchers = Array.from(document.querySelectorAll('[data-language-switch]'));
+        const closeSwitcher = (switcher) => {
+            const trigger = switcher.querySelector('[data-language-trigger]');
+            const menu = switcher.querySelector('[data-language-menu]');
+            if (!trigger || !menu) {
+                return;
+            }
+            switcher.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+            menu.hidden = true;
+            menu.querySelectorAll('[data-language-option]').forEach((option) => {
+                option.tabIndex = -1;
+            });
+        };
+        const openSwitcher = (switcher) => {
+            const trigger = switcher.querySelector('[data-language-trigger]');
+            const menu = switcher.querySelector('[data-language-menu]');
+            if (!trigger || !menu) {
+                return;
+            }
+            switcher.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+            menu.hidden = false;
+        };
+        const focusOption = (option) => {
+            option.tabIndex = 0;
+            option.focus();
+        };
+        languageSwitchers.forEach((switcher, index) => {
+            const trigger = switcher.querySelector('[data-language-trigger]');
+            const label = switcher.querySelector('[data-language-label]');
+            const menu = switcher.querySelector('[data-language-menu]');
+            const options = menu ? Array.from(menu.querySelectorAll('[data-language-option]')) : [];
+            if (!trigger || !menu || !options.length) {
+                return;
+            }
+            const fallbackLang = 'en';
+            const triggerId = trigger.id || `language-trigger-${index}`;
+            trigger.id = triggerId;
+            menu.setAttribute('aria-labelledby', triggerId);
+            const setActiveOption = (option) => {
+                options.forEach((item) => {
+                    const isActive = item === option;
+                    item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    item.tabIndex = isActive ? 0 : -1;
+                });
+                const optionLabel = option.textContent.trim();
+                if (label) {
+                    label.textContent = optionLabel;
+                } else {
+                    trigger.textContent = optionLabel;
+                }
+                trigger.setAttribute('data-selected-lang', option.dataset.lang || '');
+            };
+            const findOptionFor = (langCode) => options.find((option) => normalizeLang(option.dataset.lang) === langCode);
+            const initialOption = findOptionFor(preferredLang) || findOptionFor(fallbackLang) || options[0];
+            if (initialOption) {
+                setActiveOption(initialOption);
+            }
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                const expanded = trigger.getAttribute('aria-expanded') === 'true';
+                if (expanded) {
+                    closeSwitcher(switcher);
+                } else {
+                    languageSwitchers.forEach((other) => {
+                        if (other !== switcher) {
+                            closeSwitcher(other);
+                        }
+                    });
+                    openSwitcher(switcher);
+                    const activeOption = options.find((option) => option.getAttribute('aria-selected') === 'true') || options[0];
+                    if (activeOption) {
+                        focusOption(activeOption);
+                    }
+                }
+            });
+            trigger.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    languageSwitchers.forEach((other) => {
+                        if (other !== switcher) {
+                            closeSwitcher(other);
+                        }
+                    });
+                    openSwitcher(switcher);
+                    const activeOption = options.find((option) => option.getAttribute('aria-selected') === 'true') || options[0];
+                    const focusTarget = event.key === 'ArrowUp' ? (activeOption || options[options.length - 1]) : (activeOption || options[0]);
+                    if (focusTarget) {
+                        focusOption(focusTarget);
+                    }
+                } else if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    trigger.click();
+                } else if (event.key === 'Escape') {
+                    closeSwitcher(switcher);
+                }
+            });
+            options.forEach((option, optionIndex) => {
+                option.tabIndex = option.getAttribute('aria-selected') === 'true' ? 0 : -1;
+                option.addEventListener('click', () => {
+                    setActiveOption(option);
+                    closeSwitcher(switcher);
+                    const destination = option.dataset.href;
+                    if (destination) {
+                        window.location.href = destination;
+                    }
+                });
+                option.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        option.click();
+                    } else if (event.key === 'Escape') {
+                        event.preventDefault();
+                        closeSwitcher(switcher);
+                        trigger.focus();
+                    } else if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        const offset = event.key === 'ArrowDown' ? 1 : -1;
+                        let nextIndex = optionIndex + offset;
+                        if (nextIndex < 0) {
+                            nextIndex = options.length - 1;
+                        } else if (nextIndex >= options.length) {
+                            nextIndex = 0;
+                        }
+                        const nextOption = options[nextIndex];
+                        if (nextOption) {
+                            setActiveOption(nextOption);
+                            focusOption(nextOption);
+                        }
+                    } else if (event.key === 'Tab') {
+                        closeSwitcher(switcher);
+                    }
+                });
+            });
+        });
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('[data-language-switch]')) {
+                languageSwitchers.forEach((switcher) => closeSwitcher(switcher));
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const activeSwitcher = languageSwitchers.find((switcher) => switcher.classList.contains('is-open'));
+                if (activeSwitcher) {
+                    const trigger = activeSwitcher.querySelector('[data-language-trigger]');
+                    closeSwitcher(activeSwitcher);
+                    trigger?.focus();
+                }
+            }
+        });
         if (form && message) {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
