@@ -502,8 +502,9 @@ body {
 .pricing-grid {
   display: grid;
   gap: 1.75rem;
-  max-width: 720px;
+  max-width: 1080px;
   margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .pricing-card {
@@ -523,6 +524,14 @@ body {
 
 .pricing-card .price span {
   font-size: 2.2rem;
+}
+
+.pricing-card .price.price-custom {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .pricing-card ul {
@@ -761,6 +770,12 @@ input:focus-visible {
   .footer-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: start;
+  }
+}
+
+@media (min-width: 1080px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
