@@ -8,8 +8,13 @@
   status = 301
 
 [[redirects]]
+  from = "/en/"
+  to = "/"
+  status = 301
+
+[[redirects]]
   from = "/en/index.html"
-  to = "/en/"
+  to = "/"
   status = 301
 
 [[redirects]]
@@ -25,6 +30,11 @@
 [[redirects]]
   from = "/de/index.html"
   to = "/de/"
+  status = 301
+
+[[redirects]]
+  from = "/pl/index.html"
+  to = "/pl/"
   status = 301
 
 [dev]
