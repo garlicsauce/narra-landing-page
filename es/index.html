@@ -390,26 +390,11 @@
                         <input id="email" name="email" type="email" placeholder="ana@tutienda.com" required autocomplete="email" />
                     </div>
                     <div class="form-row form-row-inline">
-                        <div>
-                            <label for="company">Marca o empresa</label>
-                            <input id="company" name="company" type="text" placeholder="Tu marca" required autocomplete="organization" />
-                        </div>
-                        <div>
-                            <label for="role">Rol</label>
-                            <input id="role" name="role" type="text" placeholder="Head of Content" autocomplete="organization-title" />
-                        </div>
+                        <input id="consent" name="consent" type="checkbox" required />
+                        <label for="consent">Acepto el contacto en relación con el programa beta de Narra.</label>
                     </div>
-                    <div class="form-row">
-                        <label for="website">Sitio web</label>
-                        <input id="website" name="website" type="url" placeholder="https://" autocomplete="url" />
-                    </div>
-                    <div class="form-row">
-                        <label for="notes">Notas adicionales</label>
-                        <textarea id="notes" name="notes" placeholder="Comparte tus objetivos de contenido"></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button class="primary-cta" type="submit">Solicitar invitación</button>
-                    </div>
+                    <button class="primary-cta" type="submit">Únete a la beta</button>
+                    <p class="form-message" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </section>
@@ -451,6 +436,8 @@
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const siteNav = document.querySelector('.site-nav');
+        const form = document.querySelector('form.beta');
+        const message = document.querySelector('.form-message');
         menuToggle?.addEventListener('click', () => {
             const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', String(!expanded));
@@ -609,6 +596,33 @@
                 }
             }
         });
+        if (form && message) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                message.textContent = '';
+                message.className = 'form-message';
+                const formData = new FormData(form);
+                const encoded = new URLSearchParams(formData).toString();
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: encoded
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            form.reset();
+                            message.textContent = '¡Gracias! Te enviaremos la invitación en 48 horas.';
+                            message.className = 'form-message success';
+                        } else {
+                            throw new Error('Network error');
+                        }
+                    })
+                    .catch(() => {
+                        message.textContent = 'Algo salió mal. Inténtalo de nuevo o ponte en contacto con nosotros.';
+                        message.className = 'form-message error';
+                    });
+            });
+        }
         feather.replace();
         const yearEl = document.querySelector('[data-year]');
         if (yearEl) {

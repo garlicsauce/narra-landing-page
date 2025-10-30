@@ -390,26 +390,11 @@
                         <input id="email" name="email" type="email" placeholder="lea@deinshop.de" required autocomplete="email" />
                     </div>
                     <div class="form-row form-row-inline">
-                        <div>
-                            <label for="company">Marke oder Unternehmen</label>
-                            <input id="company" name="company" type="text" placeholder="Deine Marke" required autocomplete="organization" />
-                        </div>
-                        <div>
-                            <label for="role">Rolle</label>
-                            <input id="role" name="role" type="text" placeholder="Head of Content" autocomplete="organization-title" />
-                        </div>
+                        <input id="consent" name="consent" type="checkbox" required />
+                        <label for="consent">Ich stimme zu, bezüglich des Narra-Beta-Programms kontaktiert zu werden.</label>
                     </div>
-                    <div class="form-row">
-                        <label for="website">Webseite</label>
-                        <input id="website" name="website" type="url" placeholder="https://" autocomplete="url" />
-                    </div>
-                    <div class="form-row">
-                        <label for="notes">Weitere Notizen</label>
-                        <textarea id="notes" name="notes" placeholder="Teile deine Content-Ziele"></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button class="primary-cta" type="submit">Einladung anfordern</button>
-                    </div>
+                    <button class="primary-cta" type="submit">Beta beitreten</button>
+                    <p class="form-message" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </section>
@@ -451,6 +436,8 @@
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const siteNav = document.querySelector('.site-nav');
+        const form = document.querySelector('form.beta');
+        const message = document.querySelector('.form-message');
         menuToggle?.addEventListener('click', () => {
             const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', String(!expanded));
@@ -609,6 +596,33 @@
                 }
             }
         });
+        if (form && message) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                message.textContent = '';
+                message.className = 'form-message';
+                const formData = new FormData(form);
+                const encoded = new URLSearchParams(formData).toString();
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: encoded
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            form.reset();
+                            message.textContent = 'Danke! Wir senden dir die Einladung innerhalb von 48 Stunden.';
+                            message.className = 'form-message success';
+                        } else {
+                            throw new Error('Network error');
+                        }
+                    })
+                    .catch(() => {
+                        message.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut oder kontaktiere uns.';
+                        message.className = 'form-message error';
+                    });
+            });
+        }
         feather.replace();
         const yearEl = document.querySelector('[data-year]');
         if (yearEl) {
