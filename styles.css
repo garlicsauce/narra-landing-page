@@ -144,65 +144,137 @@ body {
 .language-select {
   position: relative;
   display: inline-flex;
+  align-items: stretch;
+}
+
+.language-trigger {
+  display: inline-flex;
   align-items: center;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(26, 42, 58, 0.2);
-  background: rgba(255, 255, 255, 0.92);
-  padding: 0.35rem 0.75rem;
-  color: inherit;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.language-select:focus-within {
-  border-color: rgba(108, 92, 231, 0.45);
-  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.12);
-}
-
-.language-select select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  background: transparent;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 10rem;
+  padding: 0.55rem 2.4rem 0.55rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(26, 42, 58, 0.18);
+  background: linear-gradient(140deg, rgba(247, 247, 251, 0.95), rgba(255, 255, 255, 0.78));
   color: inherit;
   font: inherit;
+  font-weight: 600;
   cursor: pointer;
-  padding: 0.35rem 1.8rem 0.35rem 0.2rem;
-  min-width: 9rem;
-  line-height: 1.25;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+  position: relative;
+  outline: none;
+  white-space: nowrap;
 }
 
-.language-select select:focus-visible {
-  outline: 3px solid rgba(108, 92, 231, 0.45);
-  outline-offset: 2px;
-  border-radius: inherit;
+.language-trigger:hover {
+  border-color: rgba(108, 92, 231, 0.38);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.96), rgba(247, 247, 251, 0.85));
 }
 
-.language-select select option {
-  color: var(--ink);
-}
-
-.language-select::after {
+.language-trigger::after {
   content: "";
   position: absolute;
-  right: 0.7rem;
+  right: 0.9rem;
   top: 50%;
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateY(-50%) rotate(45deg);
   pointer-events: none;
+  transition: transform var(--transition);
 }
 
-.site-nav .language-select {
+.language-select.is-open .language-trigger::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.language-select.is-open .language-trigger {
+  border-color: rgba(108, 92, 231, 0.45);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.98), rgba(247, 247, 251, 0.88));
+}
+
+.language-select:focus-within .language-trigger {
+  border-color: rgba(108, 92, 231, 0.45);
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.12);
+}
+
+.language-options {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+  position: absolute;
+  z-index: 24;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: max(100%, 11.5rem);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(108, 92, 231, 0.97), rgba(10, 37, 64, 0.95));
+  box-shadow: 0 24px 50px rgba(10, 37, 64, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: none;
+}
+
+.language-select.is-open .language-options {
+  display: block;
+}
+
+.language-options li {
+  margin: 0;
+}
+
+.language-options [data-language-option] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.language-options [data-language-option]:hover,
+.language-options [data-language-option]:focus {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  outline: none;
+}
+
+.language-options [data-language-option][aria-selected='true'] {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.language-options [data-language-option]:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.site-nav .language-trigger {
   border-color: rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   color: inherit;
 }
 
-.site-nav .language-select select {
-  color: inherit;
+.site-nav .language-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.48);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.site-nav .language-select.is-open .language-trigger {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.site-nav .language-select:focus-within .language-trigger {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
 }
 
 .site-nav.is-open {
