@@ -181,13 +181,12 @@
                 <div class="language-switch">
                     <label class="sr-only" for="language-picker-nav">Choisir la langue</label>
                     <div class="language-select">
-                        <span aria-hidden="true" class="language-flag"></span>
                         <select id="language-picker-nav" name="language-picker-nav">
-                            <option value="/" data-flag="pl" data-lang="pl">Polski (PL)</option>
-                            <option value="/en/" data-flag="en" data-lang="en">English (EN)</option>
-                            <option value="/es/" data-flag="es" data-lang="es">Español (ES)</option>
-                            <option value="/fr/" data-flag="fr" data-lang="fr" selected>Français (FR)</option>
-                            <option value="/de/" data-flag="de" data-lang="de">Deutsch (DE)</option>
+                            <option value="/en/" data-lang="en" selected>English (EN)</option>
+                            <option value="/" data-lang="pl">Polski (PL)</option>
+                            <option value="/es/" data-lang="es">Español (ES)</option>
+                            <option value="/fr/" data-lang="fr">Français (FR)</option>
+                            <option value="/de/" data-lang="de">Deutsch (DE)</option>
                         </select>
                     </div>
                 </div>
@@ -432,13 +431,12 @@
             <div class="language-switch footer-languages">
                 <label class="sr-only" for="language-picker-footer">Choisir la langue</label>
                 <div class="language-select">
-                    <span aria-hidden="true" class="language-flag"></span>
                     <select id="language-picker-footer" name="language-picker-footer">
-                        <option value="/" data-flag="pl" data-lang="pl">Polski (PL)</option>
-                        <option value="/en/" data-flag="en" data-lang="en">English (EN)</option>
-                        <option value="/es/" data-flag="es" data-lang="es">Español (ES)</option>
-                        <option value="/fr/" data-flag="fr" data-lang="fr" selected>Français (FR)</option>
-                        <option value="/de/" data-flag="de" data-lang="de">Deutsch (DE)</option>
+                        <option value="/en/" data-lang="en" selected>English (EN)</option>
+                        <option value="/" data-lang="pl">Polski (PL)</option>
+                        <option value="/es/" data-lang="es">Español (ES)</option>
+                        <option value="/fr/" data-lang="fr">Français (FR)</option>
+                        <option value="/de/" data-lang="de">Deutsch (DE)</option>
                     </select>
                 </div>
             </div>
@@ -454,24 +452,20 @@
             menuToggle.setAttribute('aria-expanded', String(!expanded));
             siteNav?.classList.toggle('is-open');
         });
-        const updateLanguageFlag = (select) => {
-            const flagEl = select.closest('.language-select')?.querySelector('.language-flag');
-            const selectedOption = select.selectedOptions?.[0] ?? select.options[select.selectedIndex];
-            const flagCode = selectedOption?.dataset.flag;
-            if (flagEl) {
-                if (flagCode) {
-                    flagEl.style.backgroundImage = `url(/assets/flags/${flagCode}.svg)`;
-                } else {
-                    flagEl.style.backgroundImage = 'none';
+        document.querySelectorAll('.language-select select').forEach((select) => {
+            const normalizeLang = (lang) => (lang || '').toLowerCase().split('-')[0];
+            const currentLang = normalizeLang(document.documentElement.lang) || 'en';
+            const currentOption = select.querySelector(`[data-lang="${currentLang}"]`);
+            if (currentOption) {
+                select.value = currentOption.value;
+            } else {
+                const defaultOption = select.querySelector('[data-lang="en"]');
+                if (defaultOption) {
+                    select.value = defaultOption.value;
                 }
             }
-        };
-        document.querySelectorAll('.language-select select').forEach((select) => {
-            updateLanguageFlag(select);
-            select.addEventListener('input', () => updateLanguageFlag(select));
             select.addEventListener('change', (event) => {
                 const target = event.currentTarget;
-                updateLanguageFlag(target);
                 const destination = target.value;
                 if (destination) {
                     window.location.href = destination;
