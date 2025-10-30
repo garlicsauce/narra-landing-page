@@ -178,27 +178,18 @@
                 <a class="nav-link" href="#pricing">Preise</a>
                 <a class="nav-link" href="#faq">FAQ</a>
                 <a class="nav-link nav-cta" href="#beta">Beta beitreten</a>
-                <div class="language-switch" role="group" aria-label="Sprachauswahl">
-                    <a class="language-option" href="/" lang="pl">
-                        <span aria-hidden="true" class="flag">🇵🇱</span>
-                        <span class="language-code">PL</span>
-                    </a>
-                    <a class="language-option" href="/en/" lang="en">
-                        <span aria-hidden="true" class="flag">🇬🇧</span>
-                        <span class="language-code">EN</span>
-                    </a>
-                    <a class="language-option" href="/es/" lang="es">
-                        <span aria-hidden="true" class="flag">🇪🇸</span>
-                        <span class="language-code">ES</span>
-                    </a>
-                    <a class="language-option" href="/fr/" lang="fr">
-                        <span aria-hidden="true" class="flag">🇫🇷</span>
-                        <span class="language-code">FR</span>
-                    </a>
-                    <a class="language-option is-active" href="/de/" lang="de" aria-current="page">
-                        <span aria-hidden="true" class="flag">🇩🇪</span>
-                        <span class="language-code">DE</span>
-                    </a>
+                <div class="language-switch">
+                    <label class="sr-only" for="language-picker-nav">Sprache wählen</label>
+                    <div class="language-select">
+                        <span aria-hidden="true" class="language-flag"></span>
+                        <select id="language-picker-nav" name="language-picker-nav">
+                            <option value="/" data-flag="pl" data-lang="pl">Polski (PL)</option>
+                            <option value="/en/" data-flag="en" data-lang="en">English (EN)</option>
+                            <option value="/es/" data-flag="es" data-lang="es">Español (ES)</option>
+                            <option value="/fr/" data-flag="fr" data-lang="fr">Français (FR)</option>
+                            <option value="/de/" data-flag="de" data-lang="de" selected>Deutsch (DE)</option>
+                        </select>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -438,27 +429,18 @@
                 <a class="footer-link" href="#faq">FAQ</a>
                 <a class="footer-link" href="#beta">Beta beitreten</a>
             </nav>
-            <div class="footer-languages" role="group" aria-label="Sprachauswahl">
-                <a class="language-option" href="/" lang="pl">
-                    <span aria-hidden="true" class="flag">🇵🇱</span>
-                    <span class="language-code">PL</span>
-                </a>
-                <a class="language-option" href="/en/" lang="en">
-                    <span aria-hidden="true" class="flag">🇬🇧</span>
-                    <span class="language-code">EN</span>
-                </a>
-                <a class="language-option" href="/es/" lang="es">
-                    <span aria-hidden="true" class="flag">🇪🇸</span>
-                    <span class="language-code">ES</span>
-                </a>
-                <a class="language-option" href="/fr/" lang="fr">
-                    <span aria-hidden="true" class="flag">🇫🇷</span>
-                    <span class="language-code">FR</span>
-                </a>
-                <a class="language-option is-active" href="/de/" lang="de" aria-current="page">
-                    <span aria-hidden="true" class="flag">🇩🇪</span>
-                    <span class="language-code">DE</span>
-                </a>
+            <div class="language-switch footer-languages">
+                <label class="sr-only" for="language-picker-footer">Sprache wählen</label>
+                <div class="language-select">
+                    <span aria-hidden="true" class="language-flag"></span>
+                    <select id="language-picker-footer" name="language-picker-footer">
+                        <option value="/" data-flag="pl" data-lang="pl">Polski (PL)</option>
+                        <option value="/en/" data-flag="en" data-lang="en">English (EN)</option>
+                        <option value="/es/" data-flag="es" data-lang="es">Español (ES)</option>
+                        <option value="/fr/" data-flag="fr" data-lang="fr">Français (FR)</option>
+                        <option value="/de/" data-flag="de" data-lang="de" selected>Deutsch (DE)</option>
+                    </select>
+                </div>
             </div>
         </div>
         <p class="footer-note">© <span data-year></span> Narra. Alle Rechte vorbehalten.</p>
@@ -471,6 +453,30 @@
             const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', String(!expanded));
             siteNav?.classList.toggle('is-open');
+        });
+        const updateLanguageFlag = (select) => {
+            const flagEl = select.closest('.language-select')?.querySelector('.language-flag');
+            const selectedOption = select.selectedOptions?.[0] ?? select.options[select.selectedIndex];
+            const flagCode = selectedOption?.dataset.flag;
+            if (flagEl) {
+                if (flagCode) {
+                    flagEl.style.backgroundImage = `url(/assets/flags/${flagCode}.svg)`;
+                } else {
+                    flagEl.style.backgroundImage = 'none';
+                }
+            }
+        };
+        document.querySelectorAll('.language-select select').forEach((select) => {
+            updateLanguageFlag(select);
+            select.addEventListener('input', () => updateLanguageFlag(select));
+            select.addEventListener('change', (event) => {
+                const target = event.currentTarget;
+                updateLanguageFlag(target);
+                const destination = target.value;
+                if (destination) {
+                    window.location.href = destination;
+                }
+            });
         });
         feather.replace();
         const yearEl = document.querySelector('[data-year]');
