@@ -226,6 +226,69 @@
                 </div>
             </div>
         </section>
+        <section id="problem" class="section problem">
+            <div class="shell problem-inner">
+                <div class="problem-copy">
+                    <h2>Manuelles Schreiben bremst dein Team aus.</h2>
+                    <p>Die meisten Teams verbringen jede Woche über 6 Stunden damit, Blogartikel zu erstellen und zu korrigieren. Narras Multi-Agenten-KI reduziert das auf Minuten – bei gleichbleibendem Markenton und SEO-Qualität.</p>
+                    <div class="problem-actions">
+                        <a class="primary-cta" href="#beta">So funktioniert es</a>
+                    </div>
+                </div>
+                <div class="problem-flows" data-flow-switch>
+                    <div class="flow-switch" role="tablist" aria-label="Prozessvergleich" data-active="manual">
+                        <button
+                            type="button"
+                            class="flow-switch-button is-active"
+                            role="tab"
+                            id="problem-tab-manual"
+                            aria-controls="problem-panel-manual"
+                            aria-selected="true"
+                            data-flow-tab="manual"
+                        >
+                            Manuell
+                        </button>
+                        <button
+                            type="button"
+                            class="flow-switch-button"
+                            role="tab"
+                            id="problem-tab-narra"
+                            aria-controls="problem-panel-narra"
+                            aria-selected="false"
+                            data-flow-tab="narra"
+                        >
+                            Narra
+                        </button>
+                        <span class="flow-switch-indicator" aria-hidden="true"></span>
+                    </div>
+                    <div class="flow-panels">
+                        <article
+                            id="problem-panel-manual"
+                            class="problem-flow manual is-active"
+                            role="tabpanel"
+                            aria-labelledby="problem-tab-manual"
+                            data-flow-panel="manual"
+                        >
+                            <h3>Manuelles Schreiben</h3>
+                            <p>Manuelles Schreiben → Entwurf → Review → Faktencheck → SEO → Veröffentlichen</p>
+                            <span class="flow-duration">(Tage)</span>
+                        </article>
+                        <article
+                            id="problem-panel-narra"
+                            class="problem-flow narra"
+                            role="tabpanel"
+                            aria-labelledby="problem-tab-narra"
+                            data-flow-panel="narra"
+                            hidden
+                        >
+                            <h3>Narra</h3>
+                            <p>Narra → Outline → Review → Veröffentlichen</p>
+                            <span class="flow-duration">(Minuten)</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="features" class="section features">
             <div class="shell section-header">
                 <h2>Was Narra leisten kann</h2>
@@ -280,6 +343,54 @@
                         <li>Automatisches Publishing und Webhooks</li>
                     </ul>
                 </article>
+            </div>
+        </section>
+        <section id="comparison" class="section comparison">
+            <div class="shell section-header">
+                <h2>Spare jede Woche Stunden mit Narra</h2>
+                <p>Vergleiche den manuellen Ablauf mit der automatisierten Narra-Pipeline.</p>
+            </div>
+            <div class="shell comparison-card">
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Aspekt</th>
+                                <th scope="col">Manueller Workflow</th>
+                                <th scope="col">Narra KI-Pipeline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Zeit pro Artikel</th>
+                                <td>~6 Stunden</td>
+                                <td>10–15 Minuten</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Faktencheck</th>
+                                <td>Manuell</td>
+                                <td>Automatisch mit Quellen</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">SEO-Optimierung</th>
+                                <td>Optional</td>
+                                <td>Integriert</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Konsistenz</th>
+                                <td>Hängt vom Texter ab</td>
+                                <td>Immer on-brand</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Veröffentlichung</th>
+                                <td>Manueller Upload</td>
+                                <td>CMS-Export mit einem Klick</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="comparison-note">Teams, die Narra nutzen, veröffentlichen 5× mehr Artikel pro Monat, ohne zusätzliche Texter einzustellen.</p>
+                <a class="primary-cta" href="#beta">Beta beitreten</a>
             </div>
         </section>
         <section id="workflow" class="section workflow">
@@ -375,11 +486,12 @@
                 </details>
             </div>
         </section>
+        
         <section id="beta" class="section beta-form">
             <div class="shell form-wrapper">
                 <div class="form-copy">
-                    <h2>Werde Teil der privaten Beta</h2>
-                    <p>Hinterlasse deine E-Mail und wir melden uns mit einer Einladung und einer 7-tägigen Testphase, sobald wir dein Markenprofil verifiziert haben.</p>
+                    <h2>Ready to publish faster? Join the private beta</h2>
+                    <p>Leave your email and we’ll reach out with an invite and a 7-day trial after verifying your brand profile. No credit card required. Setup in under 5 minutes.</p>
                 </div>
                 <form class="beta" name="beta-de" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="beta-de" />
@@ -595,6 +707,61 @@
                     closeSwitcher(activeSwitcher);
                     trigger?.focus();
                 }
+            }
+        });
+        const flowSwitches = Array.from(document.querySelectorAll('[data-flow-switch]'));
+        flowSwitches.forEach((switcher) => {
+            const tablist = switcher.querySelector('.flow-switch');
+            const tabs = tablist ? Array.from(tablist.querySelectorAll('[data-flow-tab]')) : [];
+            const panels = Array.from(switcher.querySelectorAll('[data-flow-panel]'));
+            if (!tablist || !tabs.length || !panels.length) {
+                return;
+            }
+            const activate = (target, shouldFocus = false) => {
+                if (!target) {
+                    return;
+                }
+                const targetTab = tabs.find((tab) => (tab.dataset.flowTab || '') === target);
+                const targetPanel = panels.find((panel) => (panel.dataset.flowPanel || '') === target);
+                if (!targetTab || !targetPanel) {
+                    return;
+                }
+                tabs.forEach((tab) => {
+                    const isActive = tab === targetTab;
+                    tab.classList.toggle('is-active', isActive);
+                    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    tab.tabIndex = isActive ? 0 : -1;
+                    if (isActive && shouldFocus) {
+                        tab.focus();
+                    }
+                });
+                panels.forEach((panel) => {
+                    const isActive = panel === targetPanel;
+                    panel.classList.toggle('is-active', isActive);
+                    panel.hidden = !isActive;
+                });
+                tablist.dataset.active = target;
+            };
+            tabs.forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    activate(tab.dataset.flowTab || '');
+                });
+                tab.addEventListener('keydown', (event) => {
+                    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        const direction = event.key === 'ArrowRight' ? 1 : -1;
+                        const currentIndex = tabs.indexOf(tab);
+                        const nextIndex = (currentIndex + tabs.length + direction) % tabs.length;
+                        const nextTab = tabs[nextIndex];
+                        if (nextTab) {
+                            activate(nextTab.dataset.flowTab || '', true);
+                        }
+                    }
+                });
+            });
+            const defaultTab = tabs.find((tab) => tab.classList.contains('is-active')) || tabs[0];
+            if (defaultTab) {
+                activate(defaultTab.dataset.flowTab || '');
             }
         });
         if (form && message) {

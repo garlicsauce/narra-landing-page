@@ -421,6 +421,185 @@ body {
   max-width: 60ch;
 }
 
+.problem {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(247, 247, 251, 0.95));
+}
+
+.problem-inner {
+  display: grid;
+  gap: clamp(2rem, 6vw, 3rem);
+}
+
+.problem-copy {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 48ch;
+}
+
+.problem-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.problem-flows {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+  justify-items: center;
+}
+
+.flow-switch {
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  background: rgba(108, 92, 231, 0.12);
+  padding: 0.35rem;
+  border-radius: 999px;
+  gap: 0.35rem;
+  box-shadow: inset 0 0 0 1px rgba(108, 92, 231, 0.18);
+  width: min(100%, 360px);
+}
+
+.flow-switch-indicator {
+  position: absolute;
+  inset: 0.35rem;
+  width: calc(50% - 0.35rem);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(108, 92, 231, 0.18);
+  transition: transform 0.3s ease;
+}
+
+.flow-switch[data-active="narra"] .flow-switch-indicator {
+  transform: translateX(calc(100% + 0.35rem));
+}
+
+.flow-switch-button {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0.55rem 1.35rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.flow-switch-button.is-active {
+  color: var(--navy);
+}
+
+.flow-switch-button:focus-visible {
+  outline: 3px solid rgba(108, 92, 231, 0.45);
+  outline-offset: 2px;
+}
+
+.flow-panels {
+  width: min(100%, 420px);
+  display: grid;
+  justify-items: stretch;
+}
+
+.problem-flow {
+  display: none;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: var(--shadow-sm);
+  gap: 0.75rem;
+}
+
+.problem-flow.is-active {
+  display: grid;
+}
+
+.problem-flow h3 {
+  margin: 0;
+  color: var(--navy);
+}
+
+.problem-flow p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.problem-flow .flow-duration {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--purple);
+  font-size: 0.85rem;
+}
+
+.comparison {
+  background: var(--offwhite);
+}
+
+.comparison-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2rem);
+  margin: 0 auto;
+  max-width: min(960px, 100%);
+}
+
+.comparison-card .primary-cta {
+  justify-self: center;
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(26, 42, 58, 0.06);
+  background: #fff;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 560px;
+}
+
+.comparison-table thead th {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  background: rgba(108, 92, 231, 0.08);
+  color: var(--navy);
+  font-size: 0.95rem;
+}
+
+.comparison-table tbody th,
+.comparison-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(26, 42, 58, 0.08);
+  vertical-align: top;
+}
+
+.comparison-table tbody th {
+  text-align: left;
+  color: var(--navy);
+  font-weight: 600;
+  width: 35%;
+}
+
+.comparison-table tbody td {
+  color: var(--muted);
+}
+
+.comparison-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .feature-grid {
   display: grid;
   gap: 1.75rem;
@@ -749,6 +928,19 @@ input:focus-visible {
 
   .feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .problem-inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+
+  .problem-flows {
+    justify-items: start;
+  }
+
+  .flow-switch {
+    justify-self: start;
   }
 
   .workflow-grid {
