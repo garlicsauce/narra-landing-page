@@ -235,27 +235,57 @@
                         <a class="primary-cta" href="#beta">Ver cómo funciona</a>
                     </div>
                 </div>
-                <div class="problem-flows" aria-label="Comparación de flujos">
-                    <article class="problem-flow manual">
-                        <h3>Redacción manual</h3>
-                        <p>Redacción manual → Borrador → Revisión → Verificación → SEO → Publicar</p>
-                        <span class="flow-duration">(días)</span>
-                    </article>
-                    <div class="flow-connector" aria-hidden="true">
-                        <span class="flow-label">Manual</span>
-                        <div class="flow-slider">
-                            <div class="flow-slider-track" style="--progress: 72%">
-                                <span class="flow-slider-progress"></span>
-                                <span class="flow-slider-thumb">→</span>
-                            </div>
-                        </div>
-                        <span class="flow-label">Narra</span>
+                <div class="problem-flows" data-flow-switch>
+                    <div class="flow-switch" role="tablist" aria-label="Comparación de flujos" data-active="manual">
+                        <button
+                            type="button"
+                            class="flow-switch-button is-active"
+                            role="tab"
+                            id="problem-tab-manual"
+                            aria-controls="problem-panel-manual"
+                            aria-selected="true"
+                            data-flow-tab="manual"
+                        >
+                            Manual
+                        </button>
+                        <button
+                            type="button"
+                            class="flow-switch-button"
+                            role="tab"
+                            id="problem-tab-narra"
+                            aria-controls="problem-panel-narra"
+                            aria-selected="false"
+                            data-flow-tab="narra"
+                        >
+                            Narra
+                        </button>
+                        <span class="flow-switch-indicator" aria-hidden="true"></span>
                     </div>
-                    <article class="problem-flow narra">
-                        <h3>Narra</h3>
-                        <p>Narra → Esquema → Revisión → Publicar</p>
-                        <span class="flow-duration">(minutos)</span>
-                    </article>
+                    <div class="flow-panels">
+                        <article
+                            id="problem-panel-manual"
+                            class="problem-flow manual is-active"
+                            role="tabpanel"
+                            aria-labelledby="problem-tab-manual"
+                            data-flow-panel="manual"
+                        >
+                            <h3>Redacción manual</h3>
+                            <p>Redacción manual → Borrador → Revisión → Verificación → SEO → Publicar</p>
+                            <span class="flow-duration">(días)</span>
+                        </article>
+                        <article
+                            id="problem-panel-narra"
+                            class="problem-flow narra"
+                            role="tabpanel"
+                            aria-labelledby="problem-tab-narra"
+                            data-flow-panel="narra"
+                            hidden
+                        >
+                            <h3>Narra</h3>
+                            <p>Narra → Esquema → Revisión → Publicar</p>
+                            <span class="flow-duration">(minutos)</span>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -684,6 +714,61 @@
                     closeSwitcher(activeSwitcher);
                     trigger?.focus();
                 }
+            }
+        });
+        const flowSwitches = Array.from(document.querySelectorAll('[data-flow-switch]'));
+        flowSwitches.forEach((switcher) => {
+            const tablist = switcher.querySelector('.flow-switch');
+            const tabs = tablist ? Array.from(tablist.querySelectorAll('[data-flow-tab]')) : [];
+            const panels = Array.from(switcher.querySelectorAll('[data-flow-panel]'));
+            if (!tablist || !tabs.length || !panels.length) {
+                return;
+            }
+            const activate = (target, shouldFocus = false) => {
+                if (!target) {
+                    return;
+                }
+                const targetTab = tabs.find((tab) => (tab.dataset.flowTab || '') === target);
+                const targetPanel = panels.find((panel) => (panel.dataset.flowPanel || '') === target);
+                if (!targetTab || !targetPanel) {
+                    return;
+                }
+                tabs.forEach((tab) => {
+                    const isActive = tab === targetTab;
+                    tab.classList.toggle('is-active', isActive);
+                    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    tab.tabIndex = isActive ? 0 : -1;
+                    if (isActive && shouldFocus) {
+                        tab.focus();
+                    }
+                });
+                panels.forEach((panel) => {
+                    const isActive = panel === targetPanel;
+                    panel.classList.toggle('is-active', isActive);
+                    panel.hidden = !isActive;
+                });
+                tablist.dataset.active = target;
+            };
+            tabs.forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    activate(tab.dataset.flowTab || '');
+                });
+                tab.addEventListener('keydown', (event) => {
+                    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        const direction = event.key === 'ArrowRight' ? 1 : -1;
+                        const currentIndex = tabs.indexOf(tab);
+                        const nextIndex = (currentIndex + tabs.length + direction) % tabs.length;
+                        const nextTab = tabs[nextIndex];
+                        if (nextTab) {
+                            activate(nextTab.dataset.flowTab || '', true);
+                        }
+                    }
+                });
+            });
+            const defaultTab = tabs.find((tab) => tab.classList.contains('is-active')) || tabs[0];
+            if (defaultTab) {
+                activate(defaultTab.dataset.flowTab || '');
             }
         });
         if (form && message) {
