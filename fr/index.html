@@ -512,38 +512,38 @@
             </div>
         </section>
     </main>
-    <footer class="site-footer" aria-label="Pied de page">
+    <footer class="site-footer">
         <div class="shell footer-grid">
-            <div>
-                <a class="brand" href="#hero" aria-label="Narra – accueil">
-                    <img src="../assets/logo.svg" alt="Narra" width="120" height="32" decoding="async" />
-                </a>
-                <p class="footer-tagline">IA multi-agent pour créer des contenus prêts à publier.</p>
+            <div class="footer-brand">
+                <img src="../assets/logo.svg" alt="Narra" width="120" height="32" loading="lazy" decoding="async" />
+                <p>IA multi-agent pour créer des contenus prêts à publier.</p>
             </div>
             <nav class="footer-nav" aria-label="Navigation secondaire">
-                <h3>Plan du site</h3>
-                <a class="footer-link" href="#features">Fonctionnalités</a>
-                <a class="footer-link" href="#workflow">Fonctionnement</a>
-                <a class="footer-link" href="#pricing">Tarifs</a>
-                <a class="footer-link" href="#faq">FAQ</a>
-                <a class="footer-link" href="#beta">Rejoindre la bêta</a>
-            </nav>
-            <div class="language-switch footer-languages">
-                <div class="language-select" data-language-switch>
-                    <button class="language-trigger" type="button" data-language-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Choisir la langue">
-                        <span class="language-trigger-text" data-language-label>English (EN)</span>
-                    </button>
-                    <ul class="language-options" data-language-menu role="listbox" hidden>
+                <a href="#features">Fonctionnalités</a>
+                <a href="#workflow">Fonctionnement</a>
+                <a href="#pricing">Tarifs</a>
+                <a href="#faq">FAQ</a>
+                <a href="#beta">Rejoindre la bêta</a>
+                <div class="language-switch">
+                    <div class="language-select" data-language-switch>
+                        <button class="language-trigger" type="button" data-language-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Choisir la langue">
+                            <span class="language-trigger-text" data-language-label>English (EN)</span>
+                        </button>
+                        <ul class="language-options" data-language-menu role="listbox" hidden>
                             <li><button type="button" role="option" data-language-option data-lang="en" data-href="/">English (EN)</button></li>
                             <li><button type="button" role="option" data-language-option data-lang="pl" data-href="/pl/">Polski (PL)</button></li>
-                        <li><button type="button" role="option" data-language-option data-lang="es" data-href="/es/">Español (ES)</button></li>
-                        <li><button type="button" role="option" data-language-option data-lang="fr" data-href="/fr/">Français (FR)</button></li>
-                        <li><button type="button" role="option" data-language-option data-lang="de" data-href="/de/">Deutsch (DE)</button></li>
-                    </ul>
+                            <li><button type="button" role="option" data-language-option data-lang="es" data-href="/es/">Español (ES)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="fr" data-href="/fr/">Français (FR)</button></li>
+                            <li><button type="button" role="option" data-language-option data-lang="de" data-href="/de/">Deutsch (DE)</button></li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+            <div class="footer-meta">
+                <p>© <span id="year"></span> Narra. Tous droits réservés.</p>
+                <a href="mailto:hello@getnarra.app">hello@getnarra.app</a>
             </div>
         </div>
-        <p class="footer-note">© <span data-year></span> Narra. Tous droits réservés.</p>
     </footer>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
@@ -792,9 +792,9 @@
             });
         }
         feather.replace();
-        const yearEl = document.querySelector('[data-year]');
-        if (yearEl) {
-            yearEl.textContent = new Date().getFullYear();
+        const year = document.getElementById('year');
+        if (year) {
+            year.textContent = new Date().getFullYear();
         }
     </script>
 </body>
