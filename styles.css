@@ -473,7 +473,7 @@ body {
 }
 
 .flow-switch[data-active="narra"] .flow-switch-indicator {
-  transform: translateX(calc(100% + 0.35rem));
+  transform: translateX(100%);
 }
 
 .flow-switch-button {
