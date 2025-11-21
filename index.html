@@ -15,7 +15,28 @@
 
         gtag('config', 'AW-17741907928');
 
-        gtag('event', 'conversion', { send_to: 'AW-17741907928/PscACPir-sIbENiPgIxC' });
+        // KONWERSJA: wejście na stronę (landing)
+        gtag('event', 'conversion', {
+            send_to: 'AW-17741907928/PscACPir-sIbENiPgIxC'
+        });
+    </script>
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof url !== 'undefined') {
+                    window.location = url;
+                }
+            };
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    send_to: 'AW-17741907928/IDUhCKeZo8QbENiPgIxC',
+                    event_callback: callback
+                });
+            } else {
+                callback();
+            }
+            return false;
+        }
     </script>
     <title>Narra — AI content automation for e-commerce | getnarra.app</title>
     <meta name="description" content="Narra automates content creation with a multi-agent pipeline — from outline to SEO polish. Keep your brand voice. Try the 7-day trial." />
@@ -831,6 +852,9 @@
                         form.reset();
                         message.textContent = 'Thank you! We\'ll send your invite within 48 hours.';
                         message.className = 'form-message success';
+
+                        // KONWERSJA: wysłanie formularza
+                        gtag_report_conversion();
                     } else {
                         throw new Error('Network error');
                     }
