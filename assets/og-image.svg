@@ -9,6 +9,6 @@
     <text x="120" y="330" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="500" font-size="40" fill="#C9D1D9">Where ideas turn into stories.</text>
     <text x="120" y="420" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="400" font-size="32" fill="#D9E3EE">Automatyzuj tworzenie treści. Zachowaj głos swojej marki.</text>
   </g>
-  <rect x="120" y="460" width="280" height="68" rx="34" fill="#6C5CE7"/>
+  <rect x="120" y="460" width="320" height="68" rx="34" fill="#6C5CE7"/>
   <text x="160" y="508" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="600" font-size="32" fill="#FFFFFF">Dołącz do bety</text>
 </svg>
