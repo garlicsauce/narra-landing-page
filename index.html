@@ -5,38 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17741907928"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
             dataLayer.push(arguments);
         }
-        gtag('js', new Date());
 
-        gtag('config', 'AW-17741907928');
+        var googleTagRequested = false;
+        function loadGoogleTag() {
+            if (googleTagRequested) {
+                return;
+            }
+            googleTagRequested = true;
 
-        // KONWERSJA: wejście na stronę (landing)
-        gtag('event', 'conversion', {
-            send_to: 'AW-17741907928/PscACPir-sIbENiPgIxC'
-        });
-    </script>
-    <script>
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17741907928';
+            document.head.appendChild(script);
+
+            gtag('js', new Date());
+            gtag('config', 'AW-17741907928');
+        }
+
+        function scheduleGoogleTag() {
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(loadGoogleTag, { timeout: 3000 });
+            } else {
+                window.setTimeout(loadGoogleTag, 1500);
+            }
+        }
+
+        window.addEventListener('load', scheduleGoogleTag, { once: true });
+
+        function gtag_report_cta_conversion() {
+            loadGoogleTag();
+            gtag('event', 'conversion', {
+                send_to: 'AW-17741907928/PscACPir-sIbENiPgIxC'
+            });
+        }
+
         function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof url !== 'undefined') {
                     window.location = url;
                 }
             };
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    send_to: 'AW-17741907928/IDUhCKeZo8QbENiPgIxC',
-                    event_callback: callback
-                });
-            } else {
-                callback();
-            }
+            loadGoogleTag();
+            gtag('event', 'conversion', {
+                send_to: 'AW-17741907928/IDUhCKeZo8QbENiPgIxC',
+                event_callback: callback
+            });
             return false;
         }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('a[href="#beta"]').forEach(function (cta) {
+                cta.addEventListener('click', gtag_report_cta_conversion);
+            });
+        });
     </script>
     <title>Narra — AI content automation for e-commerce | getnarra.app</title>
     <meta name="description" content="Narra automates content creation with a multi-agent pipeline — from outline to SEO polish. Keep your brand voice. Try the 7-day trial." />
